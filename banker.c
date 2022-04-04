@@ -138,9 +138,9 @@ int *safeSequence(int allocated[][4], int need[][4], int available[])
 
 void runthread(int num_t)
 {
-    printf("--->Customer/Thread %d\n", num_t);
-    printf("\tAllocated Resources:   %d %d %d %d\n", allocated[num_t][0], allocated[num_t][1], allocated[num_t][2], allocated[num_t][4]);
-    printf("\tNeeded Resources:      %d %d %d %d\n", need[num_t][0], need[num_t][1], need[num_t][2], need[num_t][4]);
+    printf("--->    Customer/Thread %d\n", num_t);
+    printf("\tAllocated Resources:   %d %d %d %d\n", allocated[num_t][0], allocated[num_t][1], allocated[num_t][2], allocated[num_t][3]);
+    printf("\tNeeded Resources:      %d %d %d %d\n", need[num_t][0], need[num_t][1], need[num_t][2], need[num_t][3]);
     printf("\tAvailable Resources:   %d %d %d %d\n", available[0], available[1], available[2], available[3]);
     printf("\tThread has started\n");
     printf("\tThread has finished\n");
@@ -148,6 +148,7 @@ void runthread(int num_t)
     for(int i = 0; i < 4; i++)
     {
         available[i] += allocated[num_t][i];
+        allocated[num_t][i] = 0;
     }
     printf("\tNew Available:         %d %d %d %d\n", available[0], available[1], available[2], available[3]);
 }
@@ -189,8 +190,6 @@ int main(int argc, char *argv[])
         printf("Enter Command: ");
         fgets(a, 50, stdin);
         a[strcspn(a, "\n")] = 0;
-        // a[strlen(a) - 1] = "\0";
-        // printf("%s\n",a);
         char *p = strtok(a, " ");
         if (strcmp(p, "RQ") == 0)
         {
@@ -199,15 +198,11 @@ int main(int argc, char *argv[])
             p = strtok(NULL, " ");
             while (p != NULL)
             {
-
                 temp[i] = atoi(p);
-                // printf("%d ,",temp[i]);
                 i++;
                 p = strtok(NULL, " ");
             }
             i = 0;
-            // for (int a = 0; a<4; a++) printf("%d, ",temp[a]);
-            // printf("hey");
             if (temp[4] == -1)
                 printf("Invalid input, use one of RQ, RL, Status, Run, Exit \n");
             else
@@ -219,12 +214,11 @@ int main(int argc, char *argv[])
                 {
                     while (i < 4)
                     {
-                        available[i] = available[i] - temp[i + 1];
-                        need[temp[0]][i] = need[temp[0]][i] - temp[i + 1];
-                        allocated[temp[0]][i] = allocated[temp[0]][i] + temp[i + 1];
+                        available[i] -= temp[i + 1];
+                        need[temp[0]][i] -= temp[i + 1];
+                        allocated[temp[0]][i] += temp[i + 1];
                         i++;
                     }
-                    // temp[0] = -1;
                     int v = safeCheck(allocated, need, available);
                     if (v == 1)
                     {
@@ -295,6 +289,7 @@ int main(int argc, char *argv[])
             int *seq = safeSequence(allocated, need, available);
             for (int i = 0; i < 5; i++)
             {
+                printf("%d\n", seq[i]);
                 pthread_t thread_id;
                 pthread_create(&thread_id, NULL, runthread, seq[i]);
                 pthread_join(thread_id, NULL);
