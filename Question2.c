@@ -2,7 +2,7 @@
 nicholassam6425 190148430
 SanchitGogia
 q2
-
+Best Fit Algorithm
 */
 
 #include <stdio.h>
