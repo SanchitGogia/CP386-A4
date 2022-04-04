@@ -33,7 +33,7 @@ void display(int maximum[][4],int allocated[][4], int need[][4], int available[]
 
     
 }
-int safeSequence(int allocated[][4], int need[][4], int available[]){
+int safeCheck(int allocated[][4], int need[][4], int available[]){
     //int need1[5][4] = need;
     int available1[4]; 
     memcpy(available1,available,4*sizeof(int));
@@ -76,7 +76,50 @@ int safeSequence(int allocated[][4], int need[][4], int available[]){
     }
     return 1;
 }
+int safeSequence(int allocated[][4], int need[][4], int available[]){
+    //int need1[5][4] = need;
+    int available1[4]; 
+    memcpy(available1,available,4*sizeof(int));
+    int completion[5] = {0,0,0,0,0};
+    int safeSequence[5] = {-1,-1,-1,-1,-1};
+    //int failState[1] = {-1};
+    int c_count = 0; //count of completed customers for the sake of safe sequence
+    int i = 0;
+    while (c_count<5){
+        printf("%d: \n",i);
+        
+        if (completion[i] == 0){
+            int flag = 1;
+            for(int x = 0; x<4;x++){
+                if(need[i][x]>available1[x]){
+                    printf("%d, %d, (%d , %d)\n",i,x, need[i][x],available1[x]);
+                    flag = 0;
+                    break;
+                }
+            }
+            if(flag == 1){
+                for (int x=0; x<4;x++){
+                    available1[x] = available1[x] + allocated[i][x];
+                    //printf("BITCH");
 
+                }
+
+                completion[i] = 1;
+                safeSequence[c_count] = i; 
+                printf("--------------");
+                c_count++;
+                i = 0;
+                
+            }
+            else i++;
+            
+        }
+        else i++;
+        
+        
+    }
+    return safeSequence;
+}
 
 int main(int argc, char *argv[]){
     setbuf(stdout,NULL);
@@ -142,7 +185,7 @@ int main(int argc, char *argv[]){
                         i++;
                     }
                     //temp[0] = -1;
-                    int v = safeSequence(allocated,need,available);
+                    int v = safeCheck(allocated,need,available);
                     printf("SS = %d",v);
                     if( v== 1){
                         for (int x = 0; x< 5;x++) temp[x] = -1;
