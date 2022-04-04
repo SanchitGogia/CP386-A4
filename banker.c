@@ -2,6 +2,37 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+void display(int maximum[][4],int allocated[][4], int need[][4], int available[]){
+    int i =0;
+    
+    printf("\nResources available: ");
+    for (int x = 0; x<4; x++) printf("%d ",available[x] );
+    printf("\nMaximum resources available per customer: ");
+    while (i < 5){
+        printf("\n%d: ",i);
+        for (int x=0;x<4;x++ ) printf("%d ",maximum[i][x]);
+        
+        i++;
+    }
+    i = 0;
+    printf("\nResources allocated to each customer: ");
+    while (i < 5){
+        printf("\n%d: ",i);
+        for (int x=0;x<4;x++ ) printf("%d ",allocated[i][x]);
+        i++;
+    }
+    printf("\nResources available per customer: ");
+    i =0;
+    while (i < 5){
+        printf("\n%d: ",i);
+        for (int x=0;x<4;x++ ) printf("%d ",need[i][x]);
+        i++;
+    }
+    printf("\n");
+
+
+    
+}
 int main(int argc, char *argv[]){
     setbuf(stdout,NULL);
     if (argc != 5){
@@ -13,25 +44,46 @@ int main(int argc, char *argv[]){
     int allocated[5][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
     int need[5][4] = {{6,4,7,3},{4,2,3,2},{2,5,3,3},{6,3,3,2},{5,5,7,5}};
     int temp[5] = {-1,-1,-1,-1,-1};
-   /* for (int i = 0; i<4;i++){
+    for (int i = 0; i<4;i++){
         available[i] = atoi(argv[i+1]);
         
-    }*/
+    }
+    printf("Number of Customers: 5\n");
+    printf("Currently Available resources: ");
+    for (int x = 0; x<4; x++) printf("%d ",available[x] );
+    printf("\nMaximum resources from file: ");
+    int n = 0;
+    while (n < 5){
+        printf("\n");
+        for (int x=0;x<4;x++ ) printf("%d ",maximum[n][x]);
+        
+        n++;
+    }
+    printf("\n");
     char a[50];
     char *command;
     while (1){
         printf("Enter Command: ");
-        scanf("%s",a);
+        fgets(a,50,stdin);
+        a[strcspn(a, "\n")] = 0;
+        //a[strlen(a) - 1] = "\0";
+        printf("%s\n",a);
         char *p = strtok(a," ");
         if(strcmp(p,"RQ")==0) {
+            printf("%s\n",p);
             int i = 0;
-            p = strtok(NULL," ");
+            
+             p = strtok(NULL, " ");
             while(p!= NULL){
-                temp[i] = (int) p;
+                
+                temp[i] = atoi(p);
+                printf("%d ,",temp[i]);
                 i++;
+                p = strtok(NULL, " ");  
             }
             i = 0;
-            
+            //for (int a = 0; a<4; a++) printf("%d, ",temp[a]);
+            //printf("hey");
             if(temp[4] == -1) printf("Invalid input, use one of RQ, RL, Status, Run, Exit \n");
             else{
                 if((need[temp[0]][0] - temp[1]>=0 && available[0] - temp[1] >=0 )&&(need[temp[0]][1] - temp[2]>=0 && available[1] - temp[2] >=0 )&&(need[temp[0]][2] - temp[3]>=0 && available[2] - temp[3] >=0 )&&
@@ -41,6 +93,7 @@ int main(int argc, char *argv[]){
                         need[temp[0]][i] = need[temp[0]][i] - temp[i+1];
                         allocated[temp[0]][i] = allocated[temp[0]][i] + temp[i+1];
                         temp[i+1] = -1;  
+                        i++;
                     }
                     temp[0] = -1;
                     printf("State is safe, and request is satisfied\n");
@@ -67,8 +120,9 @@ int main(int argc, char *argv[]){
             int i = 0;
             p = strtok(NULL," ");
             while(p!= NULL){
-                temp[i] = (int) p;
+                temp[i] = atoi(p);
                 i++;
+                p = strtok(NULL," ");
             }
             i = 0;
             
@@ -87,13 +141,14 @@ int main(int argc, char *argv[]){
                         need[temp[0]][i] = need[temp[0]][i] + temp[i+1];
                         allocated[temp[0]][i] = release_counter;
                     }
-                    temp[i+1] = -1;   
+                    temp[i+1] = -1;  
+                    i++; 
                 }
                 printf("The resources have been released successfully");
             }
         }
         else if(strcmp(p,"Run")==0) printf("Run \n");
-        else if(strcmp(p,"Status")==0) printf("Status\n");
+        else if(strcmp(p,"Status")==0) display(maximum,allocated,need,available);
         else if(strcmp(p,"Exit")==0) break;
         else printf("Invalid input, use one of RQ, RL, Status, Run, Exit \n");
     }
