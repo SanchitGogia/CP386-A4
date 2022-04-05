@@ -54,11 +54,11 @@ memory allocation. The best-fit algorithm involves managing a contiguous region
 of memory of size memory_size ehere addresses may range from 0 ... memory_size-1.
 Memory size is passed as a command line argument to the program.
 
-# Test Cases & Use Examples
-See Screenshots
+## Test Cases & Use Examples
+See [Screenshots](https://github.com/SanchitGogia/CP386-A4/blob/master/readme/readme.md#screenshots)
 
-# About Developers
-Two Wilfrid Laurier Univeristy students 
+## About Developers
+Two Wilfrid Laurier University students 
 
-# License
+## License
 For use only by Wilfrid Laurier University
