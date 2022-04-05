@@ -14,10 +14,12 @@ runs Q1 with the argument 1000000
 <a href="https://github.com/SanchitGogia/CP386-A4/blob/master/readme/Q1.PNG">
 	<img src="https://github.com/SanchitGogia/CP386-A4/blob/master/readme/Q1.PNG" />
 </a>
+
 Example input & output of Question 1
 <a href="https://github.com/SanchitGogia/CP386-A4/blob/master/readme/Q2.PNG">
 	<img src="https://github.com/SanchitGogia/CP386-A4/blob/master/readme/Q2.PNG" />
 </a>
+
 Example input & output of Question 2
 
 # Contribution
