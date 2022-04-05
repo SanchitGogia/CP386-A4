@@ -55,3 +55,7 @@ Memory size is passed as a command line argument to the program.
 See Screenshots
 
 # About Developers
+Two Wilfrid Laurier Univeristy students 
+
+# License
+For use only by Wilfrid Laurier University
