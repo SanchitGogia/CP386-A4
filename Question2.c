@@ -1,9 +1,9 @@
 /*
-nicholassam6425 190148430
-SanchitGogia
-q2
-Best Fit Algorithm
+Sanchit Gogia 193272580 SanchitGogia
+Nicholas Sam 190148430 nicholassam6425
+https://github.com/SanchitGogia/CP386-A4
 */
+
 
 #include <stdio.h>
 #include <string.h>

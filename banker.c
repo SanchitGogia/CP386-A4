@@ -1,3 +1,9 @@
+/*
+Sanchit Gogia 193272580 SanchitGogia
+Nicholas Sam 190148430 nicholassam6425
+https://github.com/SanchitGogia/CP386-A4
+*/
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
