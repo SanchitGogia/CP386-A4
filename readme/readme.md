@@ -1,5 +1,5 @@
-#CP386 Assignment 4
-##Sanchit Gogia & Nicholas Sam
+# CP386 Assignment 4
+## Sanchit Gogia & Nicholas Sam
 
 # Makefile
 ### Question 1
