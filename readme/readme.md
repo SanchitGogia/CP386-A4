@@ -28,6 +28,9 @@ Example input & output of Question 2
 ### Sanchit Gogia
 Question 1
 - main
+- allocate
+- release
+- status
 - safeCheck
 - safeSequence
 - display
